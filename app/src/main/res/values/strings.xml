@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CodeReviewTest</string>
+    <string name="phone_settingsLabel">Phone Settings</string>
+    <string name="optionsLabel">Options</string>
+    <string name="call5ButtonLabel">CALL 5</string>
+    <string name="backButtonLabel">BACK</string>
+    <string name="homeButtonLabel">HOME</string>
+
+    <string name="internet_devicesLabel"><![CDATA[Internet & Devices]]></string>
+    <string name="screen_brightnessLabel">Screen Brightness</string>
+    <string name="volume_ringtoneLabel"><![CDATA[Volume & Ringtone]]></string>
+    <string name="home_screenLabel">Home Screen</string>
+    <string name="customize_phoneLabel">Customize Phone</string>
+    <string name="android_settingsLabel">Android Settings</string>
+</resources>
