@@ -13,11 +13,12 @@ import android.widget.TextView;
 
 import com.example.codereviewtest.OptionPhoneSettingActivity;
 import com.example.codereviewtest.R;
+import com.example.codereviewtest.fragments.OptionSettingFragment;
 
 import java.util.List;
 
-public class AdapterPhoneSettings extends RecyclerView.Adapter<AdapterPhoneSettings.ListViewHolder>{
 
+public class PhoneSettingsAdapter extends RecyclerView.Adapter<PhoneSettingsAdapter.ListViewHolder>{
     private int[] mOptionsImages = {
             R.drawable.ic_signal,
             R.drawable.ic_screen_brightness,
@@ -27,12 +28,12 @@ public class AdapterPhoneSettings extends RecyclerView.Adapter<AdapterPhoneSetti
             R.drawable.ic_android
     };
 
-    List<String> listDatos;
+    List<String> dataListSettingsOptions;
     private Context context;
 
-    public AdapterPhoneSettings( Context context, List<String> listDatos ){
+    public PhoneSettingsAdapter(Context context, List<String> dataListSettingsOptions){
         this.context = context;
-        this.listDatos = listDatos;
+        this.dataListSettingsOptions = dataListSettingsOptions;
     }
 
     @NonNull
@@ -44,32 +45,37 @@ public class AdapterPhoneSettings extends RecyclerView.Adapter<AdapterPhoneSetti
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder listViewHolder, final int position) {
-        String positions = listDatos.get(position);
+        String positions = dataListSettingsOptions.get(position);
 
-        listViewHolder.mOptionItem.setText(positions);
-        listViewHolder.mImageItem.setImageResource(mOptionsImages[position]);
+        listViewHolder.getmOptionItem().setText(positions);
+        listViewHolder.getmImageItem().setImageResource(mOptionsImages[position]);
 
-        listViewHolder.mItem.setOnClickListener(new View.OnClickListener() {
+        listViewHolder.getmItem().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.optionItemLinearLayout) {
+                if (v.getId() == R.id.option_item_linearlayout) {
                     goToOptionPhoneSetting(position);
                 }
             }
         });
     }
 
+    /**
+     * This method create a new instance of Intent for go to OptionSettingFragment, also put a parameter for the fragment.
+     *
+     * @param index: This parameter indicates the option that the user selected and help us to decide which fragment renderize.
+     */
     public void goToOptionPhoneSetting(int index){
 
         Intent intent = new Intent();
         intent.setClass(context, OptionPhoneSettingActivity.class);
-        intent.putExtra("index", index);
+        intent.putExtra(OptionSettingFragment.INDEX, index);
         context.startActivity(intent);
     }
 
     @Override
     public int getItemCount() {
-        return listDatos.size();
+        return dataListSettingsOptions.size();
     }
 
 
@@ -82,9 +88,21 @@ public class AdapterPhoneSettings extends RecyclerView.Adapter<AdapterPhoneSetti
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mOptionItem = itemView.findViewById(R.id.labelAdapterItem);
-            mImageItem = itemView.findViewById(R.id.imageAdapterItem);
-            mItem = itemView.findViewById(R.id.optionItemLinearLayout);
+            mOptionItem = itemView.findViewById(R.id.label_adapter_item);
+            mImageItem = itemView.findViewById(R.id.image_adapter_item);
+            mItem = itemView.findViewById(R.id.option_item_linearlayout);
+        }
+
+        public TextView getmOptionItem() {
+            return mOptionItem;
+        }
+
+        public ImageView getmImageItem() {
+            return mImageItem;
+        }
+
+        public LinearLayout getmItem() {
+            return mItem;
         }
     }
 }

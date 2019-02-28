@@ -6,13 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
-import com.example.codereviewtest.adapters.AdapterPhoneSettings;
+import com.example.codereviewtest.adapters.PhoneSettingsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PhoneSettingsActivity extends AppCompatActivity {
-
     private static final String[] sOptionsLabels = {
             "Internet & Devices",
             "Screen Brightness",
@@ -22,7 +21,7 @@ public class PhoneSettingsActivity extends AppCompatActivity {
             "Android Settings"
     };
 
-    List<String> listData;
+    List<String> dataListSettingsOptions;
     private RecyclerView mSettingsOptionsRecyclerView;
     private RecyclerView.Adapter mSettingsOptionsAdapter;
 
@@ -31,17 +30,17 @@ public class PhoneSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_settings);
 
-        mSettingsOptionsRecyclerView = findViewById(R.id.recycleViewList);
+        mSettingsOptionsRecyclerView = findViewById(R.id.recycle_view_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);
         mSettingsOptionsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        listData = new ArrayList<>();
+        dataListSettingsOptions = new ArrayList<>();
 
-        for(int i = 0; i<6 ; i++){
-            listData.add(sOptionsLabels[i]);
+        for(int index = 0; index< sOptionsLabels.length ; index++){
+            dataListSettingsOptions.add(sOptionsLabels[index]);
         }
 
-        mSettingsOptionsAdapter = new AdapterPhoneSettings(this, listData);
+        mSettingsOptionsAdapter = new PhoneSettingsAdapter(this, dataListSettingsOptions);
         mSettingsOptionsRecyclerView.setAdapter(mSettingsOptionsAdapter);
     }
 }

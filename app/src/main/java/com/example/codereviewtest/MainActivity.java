@@ -15,17 +15,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPhoneSettingsButton = findViewById(R.id.buttonPhoneSettings);
+        mPhoneSettingsButton = findViewById(R.id.button_phone_settings);
         mPhoneSettingsButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.buttonPhoneSettings){
+        if(v.getId() == R.id.button_phone_settings){
             goToPhoneSettings();
         }
     }
 
+    /**
+     * This method create a new instance of Intent for go to PhoneSettingsActivity
+     * and finish the Main activity.
+     */
     public void goToPhoneSettings() {
         Intent intent = new Intent();
         intent.setClass(this, PhoneSettingsActivity.class);

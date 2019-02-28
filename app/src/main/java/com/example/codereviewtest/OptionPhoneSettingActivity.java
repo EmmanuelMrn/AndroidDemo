@@ -8,34 +8,28 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.codereviewtest.fragments.OptionSettingFragment;
 
 public class OptionPhoneSettingActivity extends AppCompatActivity {
-    private int mReceiveIndex;
-
     public OptionPhoneSettingActivity(){ }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option_phone_setting);
-
         Bundle bundle = getIntent().getExtras();
         if(bundle!= null){
-            mReceiveIndex = bundle.getInt("index");
-            bundle.putInt("index", mReceiveIndex);
+            int indexReceive = bundle.containsKey(OptionSettingFragment.INDEX) ? bundle.getInt(OptionSettingFragment.INDEX) : 0 ;
+            showOptionSettingFragment(indexReceive);
         }
+    }
 
-
-        //Step 1: Get the instance of fragment administrator
+    /**
+     * This method creates a new fragment manager instance, creates a new fragment transition instance and creates a
+     * new fragment instance and adds it to it, it also gives the index that the fragment needs to choose which rendering design.
+     *
+     * @param indexReceive: This integer is the position of the setting that user touched.
+     */
+    private void showOptionSettingFragment(int indexReceive){
         FragmentManager fragmentManager = getSupportFragmentManager();
-
-        //Step 2: Create a new transaction
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-
-        //Step 3: Create a new fragment and add it
-        OptionSettingFragment fragment = new OptionSettingFragment();
-        fragment.setArguments(bundle);
-        transaction.add(R.id.fragmentContainer, fragment);
-
-        //Step 4: Confirm
-        transaction.commit();
+        transaction.add(R.id.fragment_container, OptionSettingFragment.newInstance(indexReceive)).commit();
     }
 }

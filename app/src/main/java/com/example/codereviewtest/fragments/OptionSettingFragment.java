@@ -9,8 +9,23 @@ import android.view.ViewGroup;
 import com.example.codereviewtest.R;
 
 public class OptionSettingFragment extends Fragment {
+    public static final String INDEX = "index";
+    public static final int INTERNET_DEVICES = 0;
+    public static final int SCREEN_BRIGHTNESS = 1;
+    public static final int VOLUME_RINGTONE = 2;
+    public static final int HOME_SCREEN = 3;
+    public static final int CUSTOMIZE_PHONE = 4;
+    public static final int ANDROID_SETTINGS = 5;
     private int mIndex;
-    public OptionSettingFragment(){}
+
+    public static OptionSettingFragment newInstance(int index){
+        OptionSettingFragment fragment = new OptionSettingFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(INDEX, index);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,28 +35,31 @@ public class OptionSettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        mIndex = getArguments().getInt("index");
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            mIndex = getArguments().containsKey(INDEX) ? getArguments().getInt(INDEX) : 0;
+        }
         View view;
         switch (mIndex){
-            case 0:
+            case INTERNET_DEVICES:
                 view = inflater.inflate(R.layout.fragment_internet_devices, container, false);
                 break;
-            case 1:
+            case SCREEN_BRIGHTNESS:
                 view = inflater.inflate(R.layout.fragment_screen_brightness, container, false);
                 break;
-            case 2:
+            case VOLUME_RINGTONE:
                 view = inflater.inflate(R.layout.fragment_volume_ringtone, container, false);
                 break;
 
-            case 3:
+            case HOME_SCREEN:
                 view = inflater.inflate(R.layout.fragment_home_screen, container, false);
                 break;
 
-            case 4:
+            case CUSTOMIZE_PHONE:
                 view = inflater.inflate(R.layout.fragment_customize_phone, container, false);
                 break;
 
-            case 5:
+            case ANDROID_SETTINGS:
                 view = inflater.inflate(R.layout.fragment_android_settings, container, false);
                 break;
 
@@ -49,7 +67,6 @@ public class OptionSettingFragment extends Fragment {
                 view = inflater.inflate(R.layout.fragment_internet_devices, container, false);
                 break;
         }
-
         return view;
     }
 
