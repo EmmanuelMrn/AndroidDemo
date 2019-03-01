@@ -18,6 +18,14 @@ public class OptionSettingFragment extends Fragment {
     public static final int ANDROID_SETTINGS = 5;
     private int mIndex;
 
+    /**
+     *This method is used for create the instance of the fragment
+     *
+     * @param index: This parameter catch the index for choose which fragment layout appears,
+     *             inside the method, we send the index as a paramenter through the bundle to fragment
+     *
+     * @return fragment: This method returns the fragment with the correct fragment layout corresponding to the index.
+     */
     public static OptionSettingFragment newInstance(int index){
         OptionSettingFragment fragment = new OptionSettingFragment();
         Bundle bundle = new Bundle();

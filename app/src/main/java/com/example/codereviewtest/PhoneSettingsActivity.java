@@ -21,7 +21,7 @@ public class PhoneSettingsActivity extends AppCompatActivity {
             "Android Settings"
     };
 
-    List<String> dataListSettingsOptions;
+    List<String> mDataListSettingsOptions;
     private RecyclerView mSettingsOptionsRecyclerView;
     private RecyclerView.Adapter mSettingsOptionsAdapter;
 
@@ -34,13 +34,13 @@ public class PhoneSettingsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayout.VERTICAL, false);
         mSettingsOptionsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        dataListSettingsOptions = new ArrayList<>();
+        mDataListSettingsOptions = new ArrayList<>();
 
         for(int index = 0; index< sOptionsLabels.length ; index++){
-            dataListSettingsOptions.add(sOptionsLabels[index]);
+            mDataListSettingsOptions.add(sOptionsLabels[index]);
         }
 
-        mSettingsOptionsAdapter = new PhoneSettingsAdapter(this, dataListSettingsOptions);
+        mSettingsOptionsAdapter = new PhoneSettingsAdapter(this, mDataListSettingsOptions);
         mSettingsOptionsRecyclerView.setAdapter(mSettingsOptionsAdapter);
     }
 }

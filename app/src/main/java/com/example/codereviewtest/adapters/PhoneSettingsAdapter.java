@@ -28,12 +28,12 @@ public class PhoneSettingsAdapter extends RecyclerView.Adapter<PhoneSettingsAdap
             R.drawable.ic_android
     };
 
-    List<String> dataListSettingsOptions;
-    private Context context;
+    List<String> mDataListSettingsOptions;
+    private Context mContext;
 
     public PhoneSettingsAdapter(Context context, List<String> dataListSettingsOptions){
-        this.context = context;
-        this.dataListSettingsOptions = dataListSettingsOptions;
+        this.mContext = context;
+        this.mDataListSettingsOptions = dataListSettingsOptions;
     }
 
     @NonNull
@@ -45,7 +45,7 @@ public class PhoneSettingsAdapter extends RecyclerView.Adapter<PhoneSettingsAdap
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder listViewHolder, final int position) {
-        String positions = dataListSettingsOptions.get(position);
+        String positions = mDataListSettingsOptions.get(position);
 
         listViewHolder.getmOptionItem().setText(positions);
         listViewHolder.getmImageItem().setImageResource(mOptionsImages[position]);
@@ -68,14 +68,16 @@ public class PhoneSettingsAdapter extends RecyclerView.Adapter<PhoneSettingsAdap
     public void goToOptionPhoneSetting(int index){
 
         Intent intent = new Intent();
-        intent.setClass(context, OptionPhoneSettingActivity.class);
+        intent.setClass(mContext, OptionPhoneSettingActivity.class);
         intent.putExtra(OptionSettingFragment.INDEX, index);
-        context.startActivity(intent);
+        if(mContext != null) {
+            mContext.startActivity(intent);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return dataListSettingsOptions.size();
+        return mDataListSettingsOptions.size();
     }
 
 
